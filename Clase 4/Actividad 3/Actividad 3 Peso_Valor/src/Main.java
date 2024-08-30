@@ -1,4 +1,4 @@
-public class Main { //(-)_(-)
+public class Main {     //(-)_(-)
     public static void main(String[] args) {
         int cant=0;
         Objeto obj1=new Objeto(10,13);
