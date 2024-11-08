@@ -22,8 +22,10 @@ public class GrafoRedSocial {
         if (usuarios.containsKey(idUsuario1) && usuarios.containsKey(idUsuario2)) {
             amistades.get(idUsuario1).add(idUsuario2);
             amistades.get(idUsuario2).add(idUsuario1); // bidireccional
+            System.out.println(usuarios.get(idUsuario1).getNombre() + " y "
+                    + usuarios.get(idUsuario2).getNombre() + " son amigos ahora.");
         } else {
-            System.out.println("Uno o ambos usuarios no existen.");
+            System.out.println("Uno o los dos usuarios no existen.");
         }
     }
 
