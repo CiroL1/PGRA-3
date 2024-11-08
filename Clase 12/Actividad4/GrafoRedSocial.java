@@ -1,10 +1,11 @@
 package clase12.actividad4;
 
+
 import java.util.*;
 
 public class GrafoRedSocial {
-    private final Map<Integer, Usuario> usuarios; // Almacena usuarios por su ID
-    private final Map<Integer, List<Integer>> amistades; // Lista de adyacencia
+    private final Map<Integer, Usuario> usuarios;
+    private final Map<Integer, List<Integer>> amistades;
 
     public GrafoRedSocial() {
         this.usuarios = new HashMap<>();
@@ -17,7 +18,7 @@ public class GrafoRedSocial {
         amistades.putIfAbsent(usuario.getId(), new ArrayList<>());
     }
 
-    // conectar dos usuarios como amigos (relación bidireccional)
+    // conectar dos usuarios como amigos (relacion bidireccional)
     public void conectarAmigos(int idUsuario1, int idUsuario2) {
         if (usuarios.containsKey(idUsuario1) && usuarios.containsKey(idUsuario2)) {
             amistades.get(idUsuario1).add(idUsuario2);
@@ -29,7 +30,7 @@ public class GrafoRedSocial {
         }
     }
 
-    // recorrer la red desde un usuario dado (con DFS)
+    // recorrer la red desde un usuario dado (DFS)
     public void recorridoDFS(int idUsuarioInicio) {
         Set<Integer> visitados = new HashSet<>();
         System.out.println("Recorrido DFS desde " + usuarios.get(idUsuarioInicio).getNombre() + ":");
@@ -42,6 +43,8 @@ public class GrafoRedSocial {
 
         for (int amigo : amistades.get(idUsuario)) {
             if (!visitados.contains(amigo)) {
+                System.out.println("  Amigo de " + usuarios.get(idUsuario).getNombre() + ": "
+                        + usuarios.get(amigo).getNombre());
                 dfs(amigo, visitados);
             }
         }
