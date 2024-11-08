@@ -16,6 +16,7 @@ public class Grafo {
         almacenes.put(almacen.getId(), almacen);
         adyacencias.putIfAbsent(almacen.getId(), new ArrayList<>());
     }
+
     // conectar dos almacenes entre si
     public void conectarAlmacenes(int idAlmacen1, int idAlmacen2) {
         if (almacenes.containsKey(idAlmacen1) && almacenes.containsKey(idAlmacen2)) {
@@ -26,7 +27,7 @@ public class Grafo {
         }
     }
 
-     // recorrido en profundidad (DFS)
+    // recorrido en profundidad (DFS)
     public void recorridoDFS(int idAlmacenInicio) {
         Set<Integer> visitados = new HashSet<>();
         System.out.println("Recorrido DFS:");
@@ -43,5 +44,25 @@ public class Grafo {
             }
         }
     }
-    
+
+    // recorrido en anchura (BFS)
+    public void recorridoBFS(int idAlmacenInicio) {
+        Set<Integer> visitados = new HashSet<>();
+        Queue<Integer> cola = new LinkedList<>();
+        cola.add(idAlmacenInicio);
+        visitados.add(idAlmacenInicio);
+
+        System.out.println("Recorrido BFS:");
+        while (!cola.isEmpty()) {
+            int idAlmacen = cola.poll();
+            System.out.println(almacenes.get(idAlmacen));
+
+            for (int vecino : adyacencias.get(idAlmacen)) {
+                if (!visitados.contains(vecino)) {
+                    cola.add(vecino);
+                    visitados.add(vecino);
+                }
+            }
+        }
+    }
 }
