@@ -22,7 +22,13 @@ public class RedAlmacenes {
         redAlmacenes.conectarAlmacenes(2, 4);
         redAlmacenes.conectarAlmacenes(3, 4);
 
-        
+        // recorrido DFS desde el almacen 1
+        redAlmacenes.recorridoDFS(1);
+
+        System.out.println();
+
+        // recorrido BFS desde el almacen 1
+        redAlmacenes.recorridoBFS(1);
     }
 }
 
