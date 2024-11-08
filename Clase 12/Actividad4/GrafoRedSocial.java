@@ -1,7 +1,8 @@
 package clase12.actividad4;
 
-
 import java.util.*;
+
+// Clase Main
 
 public class GrafoRedSocial {
     private final Map<Integer, Usuario> usuarios;
