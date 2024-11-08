@@ -33,5 +33,15 @@ public class Grafo {
         dfs(idAlmacenInicio, visitados);
     }
 
+    private void dfs(int idAlmacen, Set<Integer> visitados) {
+        visitados.add(idAlmacen);
+        System.out.println(almacenes.get(idAlmacen));
+
+        for (int vecino : adyacencias.get(idAlmacen)) {
+            if (!visitados.contains(vecino)) {
+                dfs(vecino, visitados);
+            }
+        }
+    }
     
 }
