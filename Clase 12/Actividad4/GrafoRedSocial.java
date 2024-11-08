@@ -32,7 +32,7 @@ public class GrafoRedSocial {
     // recorrer la red desde un usuario dado (con DFS)
     public void recorridoDFS(int idUsuarioInicio) {
         Set<Integer> visitados = new HashSet<>();
-        System.out.println("Recorrido DFS:");
+        System.out.println("Recorrido DFS desde " + usuarios.get(idUsuarioInicio).getNombre() + ":");
         dfs(idUsuarioInicio, visitados);
     }
 
