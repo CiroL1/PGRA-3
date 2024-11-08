@@ -13,10 +13,6 @@ public class Almacen {
         return id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     @Override
     public String toString() {
         return nombre + " (ID: " + id + ")";
