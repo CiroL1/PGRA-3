@@ -25,5 +25,13 @@ public class Grafo {
             System.out.println("Uno o los dos almacenes no existen.");
         }
     }
+
+     // recorrido en profundidad (DFS)
+    public void recorridoDFS(int idAlmacenInicio) {
+        Set<Integer> visitados = new HashSet<>();
+        System.out.println("Recorrido DFS:");
+        dfs(idAlmacenInicio, visitados);
+    }
+
     
 }
