@@ -57,13 +57,15 @@ public class GrafoRedSocial {
         cola.add(idUsuarioInicio);
         visitados.add(idUsuarioInicio);
 
-        System.out.println("Recorrido BFS:");
+        System.out.println("Recorrido BFS desde " + usuarios.get(idUsuarioInicio).getNombre() + ":");
         while (!cola.isEmpty()) {
             int idUsuario = cola.poll();
             System.out.println(usuarios.get(idUsuario));
 
             for (int amigo : amistades.get(idUsuario)) {
                 if (!visitados.contains(amigo)) {
+                    System.out.println("  Amigo de " + usuarios.get(idUsuario).getNombre() + ": "
+                            + usuarios.get(amigo).getNombre());
                     cola.add(amigo);
                     visitados.add(amigo);
                 }
@@ -71,4 +73,3 @@ public class GrafoRedSocial {
         }
     }
 }
-
