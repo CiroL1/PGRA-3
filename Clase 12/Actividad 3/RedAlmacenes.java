@@ -16,7 +16,13 @@ public class RedAlmacenes {
         redAlmacenes.agregarAlmacen(almacen3);
         redAlmacenes.agregarAlmacen(almacen4);
 
-       
+        // Conectamos los almacenes entre si
+        redAlmacenes.conectarAlmacenes(1, 2);
+        redAlmacenes.conectarAlmacenes(1, 3);
+        redAlmacenes.conectarAlmacenes(2, 4);
+        redAlmacenes.conectarAlmacenes(3, 4);
+
+        
     }
 }
 
