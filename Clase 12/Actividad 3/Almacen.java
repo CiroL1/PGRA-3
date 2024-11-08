@@ -17,5 +17,8 @@ public class Almacen {
         return nombre;
     }
 
-
+    @Override
+    public String toString() {
+        return nombre + " (ID: " + id + ")";
+    }
 }
