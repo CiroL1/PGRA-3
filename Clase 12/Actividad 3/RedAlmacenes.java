@@ -1,5 +1,7 @@
 package clase12.actividad3;
 
+// Clase main
+
 public class RedAlmacenes {
     public static void main(String[] args) {
         Grafo redAlmacenes = new Grafo();
