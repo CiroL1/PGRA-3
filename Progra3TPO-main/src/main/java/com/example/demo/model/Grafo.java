@@ -1,40 +1,32 @@
 package com.example.demo.model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
-import com.example.demo.repository.*;
+
 import java.util.*;
 
 public class Grafo {
-    private Map<MovieEntity, List<PersonEntity>> adjMovies;
-    private Map<PersonEntity, List<MovieEntity>> adjPeople;
-
-    public Grafo() {
-    }
+    private Map<MovieEntity, Set<PersonEntity>> adjMovies;
+    private Map<PersonEntity, Set<MovieEntity>> adjPeople;
 
     public Grafo(List<MovieEntity> movies) {
         adjMovies = new HashMap<>();
         adjPeople = new HashMap<>();
         for (MovieEntity movie : movies) {
             // Agregar la película al grafo de películas
-            adjMovies.putIfAbsent(movie, new ArrayList<>());
+            adjMovies.putIfAbsent(movie, new HashSet<>());
 
             // Agregar actores y directores a la película
             for (PersonEntity actor : movie.getActors()) {
                 adjMovies.get(movie).add(actor); // Conectar actor con la película
-                adjPeople.putIfAbsent(actor, new ArrayList<>());
+                adjPeople.putIfAbsent(actor, new HashSet<>());
                 adjPeople.get(actor).add(movie); // Conectar película con el actor
             }
 
             for (PersonEntity director : movie.getDirectors()) {
                 adjMovies.get(movie).add(director); // Conectar director con la película
-                adjPeople.putIfAbsent(director, new ArrayList<>());
+                adjPeople.putIfAbsent(director, new HashSet<>());
                 adjPeople.get(director).add(movie); // Conectar película con el director
             }
         }
     }
-
 
     public void agregarArista(MovieEntity movie, PersonEntity person) {
         adjMovies.get(movie).add(person);
@@ -58,15 +50,14 @@ public class Grafo {
                 MovieEntity movie = (MovieEntity) actual;
 
                 // Agregar la información de la película
-                resultado.append("Movie: ").append(movie.getTitle()).append("\n")
-                        .append("Description: ").append(movie.getDescription()).append("\n");
+                resultado.append("Movie: ").append(movie.getTitle()).append("\n");
 
                 // Recorrer los actores
                 for (PersonEntity actor : movie.getActors()) {
                     if (!visitadoPeople.contains(actor)) {
                         visitadoPeople.add(actor);
                         resultado.append("Actor: ").append(actor.getName())
-                                .append(" (Born: ").append(actor.getBorn()).append(")\n");
+                                .append("\n");
                         cola.add(actor); // Agregar al recorrido
                     }
                 }
@@ -76,7 +67,7 @@ public class Grafo {
                     if (!visitadoPeople.contains(director)) {
                         visitadoPeople.add(director);
                         resultado.append("Director: ").append(director.getName())
-                                .append(" (Born: ").append(director.getBorn()).append(")\n");
+                                .append("\n");
                         cola.add(director); // Agregar al recorrido
                     }
                 }
@@ -124,14 +115,13 @@ public class Grafo {
             visitadoMovies.add(movie);
 
             // Agregar información de la película
-            resultado.append("Movie: ").append(movie.getTitle()).append("\n")
-                    .append("Description: ").append(movie.getDescription()).append("\n");
+            resultado.append("Movie: ").append(movie.getTitle()).append("\n");
 
             // Recorrer actores
             for (PersonEntity actor : movie.getActors()) {
                 if (!visitadoPeople.contains(actor)) {
                     resultado.append("Actor: ").append(actor.getName())
-                            .append(" (Born: ").append(actor.getBorn()).append(")\n");
+                            .append("\n");
                     dfsRecursivo(actor, resultado, visitadoMovies, visitadoPeople);
                 }
             }
@@ -140,7 +130,7 @@ public class Grafo {
             for (PersonEntity director : movie.getDirectors()) {
                 if (!visitadoPeople.contains(director)) {
                     resultado.append("Director: ").append(director.getName())
-                            .append(" (Born: ").append(director.getBorn()).append(")\n");
+                            .append("\n");
                     dfsRecursivo(director, resultado, visitadoMovies, visitadoPeople);
                 }
             }
@@ -169,7 +159,14 @@ public class Grafo {
 
     @Override
     public String toString() {
-        return "Grafo{" + "adjMovies=" + adjMovies + ", adjPeople=" + adjPeople + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Películas y personas:\n");
+        for (Map.Entry<MovieEntity, Set<PersonEntity>> entry : adjMovies.entrySet()) {
+            sb.append("Película: ").append(entry.getKey().getTitle()).append("\n");
+            for (PersonEntity person : entry.getValue()) {
+                sb.append("  Persona: ").append(person.getName()).append("\n");
+            }
+        }
+        return sb.toString();
     }
-
 }

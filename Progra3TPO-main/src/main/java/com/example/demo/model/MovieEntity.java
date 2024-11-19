@@ -54,8 +54,7 @@ public class MovieEntity {
         return "MovieEntity{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", actors=" + actors +
-                ", directors=" + directors +
-                '}';
+                '}'+
+                '\n';
     }
 }

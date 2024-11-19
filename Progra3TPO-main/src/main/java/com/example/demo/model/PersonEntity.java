@@ -26,6 +26,7 @@ public class PersonEntity {
         return "PersonEntity{" +
                 "name='" + name + '\'' +
                 ", born=" + born +
-                '}';
+                '}'+
+                '\n';
     }
 }
